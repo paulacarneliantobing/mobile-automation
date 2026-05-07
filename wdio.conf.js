@@ -1,20 +1,25 @@
+const path = require("path");
+
 exports.config = {
+  //
+  // RUNNER
+  //
   runner: "local",
 
   //
-  // APPIUM SERVER
+  // APPIUM
   //
   port: 4723,
 
   //
-  // TEST FILE
+  // TEST FILES
   //
   specs: ["./test/specs/**/*.ts"],
 
   exclude: [],
 
   //
-  // INSTANCE
+  // INSTANCES
   //
   maxInstances: 1,
 
@@ -23,41 +28,38 @@ exports.config = {
   //
   capabilities: [
     {
+      // platform
       platformName: "Android",
 
-      // emulator/device name
+      // emulator/device
       "appium:deviceName": "Android Emulator",
 
-      // Android version
-      "appium:platformVersion": "11",
+      // HAPUS platformVersion biar fleksibel
+      // "appium:platformVersion": "11",
 
       // automation engine
       "appium:automationName": "UiAutomator2",
 
       // APK path
-      "appium:app":
-        "C:\\QA ENGINEER\\mobile-automation\\apps\\APIDemos-debug.apk",
+      "appium:app": path.join(process.cwd(), "./apps/APIDemos-debug.apk"),
 
-      // IMPORTANT
-      // selalu mulai fresh dari home APIDemos
+      // reset settings
       "appium:noReset": false,
-
-      // jangan uninstall app setiap run
       "appium:fullReset": false,
 
-      // auto allow permission
+      // auto permission
       "appium:autoGrantPermissions": true,
 
-      // tunggu activity app siap
+      // wait activity
       "appium:appWaitActivity": "*",
 
-      // timeout command
+      // timeout
       "appium:newCommandTimeout": 240,
     },
   ],
 
   //
-  // LOG
+  // LOG LEVEL
   //
   logLevel: "info",
 
@@ -117,7 +119,7 @@ exports.config = {
   // HOOKS
   //
   before: async function () {
-    // tunggu app benar-benar terbuka
+    // tunggu app terbuka
     await browser.pause(5000);
   },
 
@@ -131,7 +133,7 @@ exports.config = {
       await browser.takeScreenshot();
     }
 
-    // pause biar kelihatan hasil di emulator
+    // pause biar hasil terlihat
     await browser.pause(3000);
   },
 };
