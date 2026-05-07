@@ -1,0 +1,1 @@
+invalid selector: WebDriverError: Invalid CSS selector 'android:id/button1'. Reason: 'css-selector-parser parse error: Expected rule but "/" found. Pos: 10.' when running "element" with method "POST"
